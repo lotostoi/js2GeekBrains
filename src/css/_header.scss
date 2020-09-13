@@ -1,0 +1,32 @@
+header {
+    display: flex;
+    min-height: 30px;
+    background-color: black;
+    padding: 20px;
+    justify-content: space-between;
+    & > a {
+        display: flex;
+        text-decoration: none;
+        font-size: 2em;
+        color: $lightColor;
+        &:hover {
+            color: $colorHoverDark;
+        }
+        &:active {
+            color: $colorActiveDark;
+        }
+    }
+
+    & > button {
+        outline: none;
+        border: none;
+        transition: transform 0.3;
+        &:hover {
+            color: $colorHoverDark;
+            background-color: rgb(83, 83, 83);
+        }
+        &:active {
+            transform: scale(0.9);
+        }
+    }
+}

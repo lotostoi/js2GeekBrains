@@ -1,0 +1,25 @@
+.products {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+    margin-top: 10px;
+    border: 1px solid rgb(206, 205, 205);
+    box-sizing: border-box;
+
+}
+
+.product-item {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    border:1px solid gray;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    &>button {
+        width: 40%;
+    }
+
+}
