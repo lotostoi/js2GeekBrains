@@ -1,20 +1,12 @@
 
-
-
-
-
-
-
-
-
 class Good {
 
     constructor(good, img = 'http://placehold.it/150x200/') {
 
-        let { id_product, product_name, price } = good
+        let { id, title, price } = good
 
-        this.id = id_product
-        this.title = product_name
+        this.id = id
+        this.title = title
         this.price = price
         this.img = img
     }
@@ -72,6 +64,8 @@ class ListGoods {
 
     }
 
+    // method for calculating of all sum 
+
     allSummAllGoods() {
 
         return this.allGoods.length > 0 ? this.allGoods.reduce((accum, good) => accum + good.price, 0) : 0
@@ -81,7 +75,9 @@ class ListGoods {
 }
 
 
-class GoodInCart extends Good{
+// ******************************** Classes for cart ******************************************
+
+class GoodInCart extends Good {
 
     constructor(goodInCart, img = 'http://placehold.it/150x200/') {
 
@@ -101,11 +97,11 @@ class GoodInCart extends Good{
 
 class Cart extends ListGoods {
 
-    constructor(goods, container = '.cartBoody') {
+    constructor(container = '.cartBoody') {
 
-        super(goods, container)
+        super(container)
 
-        this.goodsInCart = goods
+        this.goodsInCart = []
 
         this.container = document.querySelector(container)
 
@@ -124,6 +120,10 @@ class Cart extends ListGoods {
         this.calcAllAmount()
 
         this.rander()
+
+    }
+
+    #fetchGoodsInCart() {
 
     }
 
