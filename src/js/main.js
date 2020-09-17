@@ -1,24 +1,168 @@
-const products = [
-    {id: 1,/*  title: 'Notebook', */ price: 20000, imglink:'http://placehold.it/150x200/'},
-    {id: 2, title: 'Mouse', price: 1500, imglink:'http://placehold.it/150x200/'},
-    {id: 3, title: 'Keyboard', /* price: 5000, */ imglink:'http://placehold.it/150x200/'},
-    {id: 4, title: 'Gamepad', price: 4500, imglink:'http://placehold.it/150x200/'},
-];
 
-const renderProduct = ({ title = 'someproduct', price = 3000, imglink = "http://placehold.it/200x200/"}) => {
-    return `<div class="product-item">
-                 <img src = "${imglink}"/>   
-                <h3>${title}</h3>
-                <p>${price}</p>
-                <button class="by-btn">Добавить в корзину</button>
-              </div>`;
-};
 
-const renderProducts = (list) => {
-    const productList = list.map((product) => {
-        return renderProduct(product);
-    }).join('');
-    document.querySelector('.products').innerHTML = productList;
-};
 
-renderProducts(products);
+
+
+
+
+
+
+class Good {
+
+    constructor(good, img = 'http://placehold.it/150x200/') {
+
+        let { id_product, product_name, price } = good
+
+        this.id = id_product
+        this.title = product_name
+        this.price = price
+        this.img = img
+    }
+
+    rander() {
+        return `<div class="product-item" data-id="${this.id}">
+                  <img src="${this.img}" alt="Some img">
+                    <div class="desc">
+                        <h3>${this.title}</h3>
+                        <p>${this.price} \u20bd</p>
+                        <button class="buy-btn">Купить</button>
+                    </div>
+                </div>`;
+    }
+}
+
+
+class ListGoods {
+
+    #goods
+
+    constructor(container = '.products') {
+
+        this.container = document.querySelector(container)
+        this.#goods = []
+        this.allGoods = []
+        this.#init()
+
+    }
+
+    #init() {
+        this.#fetchGoods()
+        this.#rander()
+    }
+
+    #fetchGoods() {
+        this.#goods = [
+            { id: 1, title: 'Notebook', price: 20000 },
+            { id: 2, title: 'Mouse', price: 1500 },
+            { id: 3, title: 'Keyboard', price: 5000 },
+            { id: 4, title: 'Gamepad', price: 4500 },
+        ];
+    }
+
+
+    #rander() {
+
+        for (let good of this.#goods) {
+
+            const newGood = new Good(good)
+            this.allGoods.push(newGood)
+            this.container.insertAdjacentHTML('beforeend', newGood.rander())
+
+        }
+
+    }
+
+    allSummAllGoods() {
+
+        return this.allGoods.length > 0 ? this.allGoods.reduce((accum, good) => accum + good.price, 0) : 0
+
+    }
+
+}
+
+
+class GoodInCart extends Good{
+
+    constructor(goodInCart, img = 'http://placehold.it/150x200/') {
+
+        super(goodInCart, img)
+
+        this.amount = goodsInCart.quantity
+    }
+
+    rander() {
+
+        return ` template of good in the cart   `;
+
+    }
+}
+
+
+
+class Cart extends ListGoods {
+
+    constructor(goods, container = '.cartBoody') {
+
+        super(goods, container)
+
+        this.goodsInCart = goods
+
+        this.container = document.querySelector(container)
+
+        this.allSum = null
+
+        this.allAmount = null
+
+        this.#init()
+
+    }
+
+    #init() {
+
+        this.calcAllSumm()
+
+        this.calcAllAmount()
+
+        this.rander()
+
+    }
+
+    rander() {
+
+        for (let good of this.goods) {
+
+            const newGood = new GoodInCart(good)
+            this.allGoods.push(newGood)
+            this.container.insertAdjacentHTML('beforeend', newGood.rander())
+
+        }
+
+    }
+
+    // adding good(with id = id) in the cart
+    addToCart(id) { }
+
+    // removing good((with id = id)) from the cart
+    removeFromCart(id) { }
+
+    // increment amount good(with id = id)  in cart
+    incToCart(id) { }
+
+    // decrement amount good(with id = id)  in cart
+    decToCart(id) { }
+
+    //claer  all cart 
+    claerCart() { }
+
+    calcAllAmount() { }
+
+    calcAllSumm() { }
+
+}
+
+
+
+
+const cotalog = new ListGoods()
+
+console.log(cotalog.allSummAllGoods())
