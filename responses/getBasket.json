@@ -3,14 +3,14 @@
   "countGoods": 2,
   "contents": [
     {
-      "id_product": 898,
-      "product_name": "Computer",
+      "id": 898,
+      "title": "Computer",
       "price": 1000,
       "quantity": 1
     },
     {
-      "id_product": 456,
-      "product_name": "Keyboard",
+      "id": 456,
+      "title": "Keyboard",
       "price": 2000,
       "quantity": 1
     }
