@@ -51,8 +51,19 @@ header > a:active {
 }
 
 header > button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
   outline: none;
   border: none;
+  border-radius: 3px;
   -webkit-transition: -webkit-transform 0.3;
   transition: -webkit-transform 0.3;
   transition: transform 0.3;
@@ -67,6 +78,23 @@ header > button:hover {
 header > button:active {
   -webkit-transform: scale(0.9);
           transform: scale(0.9);
+}
+
+header > button > span {
+  margin-left: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 30px;
+  height: 20px;
+  border-radius: 20%;
+  background-color: chocolate;
 }
 
 .products {
@@ -97,14 +125,45 @@ header > button:active {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 40%;
+  width: 25%;
   border: 1px solid gray;
   padding: 20px 0;
   margin-bottom: 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
-.product-item > button {
-  width: 40%;
+.product-item button {
+  margin: 5px 0;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100px;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  -webkit-transition: -webkit-transform 0.3;
+  transition: -webkit-transform 0.3;
+  transition: transform 0.3;
+  transition: transform 0.3, -webkit-transform 0.3;
+  background-color: #cecccc;
+}
+
+.product-item button:hover {
+  color: orange;
+  background-color: #535353;
+}
+
+.product-item button:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
 }
 
 .cart {
@@ -166,10 +225,12 @@ header > button:active {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 50vw;
+  max-height: 70vh;
   padding: 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   background-color: #11abda;
+  overflow-y: auto;
 }
 
 .cart__body > hr {

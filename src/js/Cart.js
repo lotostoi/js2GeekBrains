@@ -1,12 +1,10 @@
-import GoodInCart  from "./GoodInCart"
-import constants from "./constants"
+import GoodInCart from "./GoodInCart"
 
-let baseURL = constants.baseURL
+import constants from "./constants"
 
 class Cart {
 
     constructor(container = '.cart__products') {
-
 
         this.container = document.querySelector(container)
 
@@ -14,11 +12,17 @@ class Cart {
 
         this.prodCart = []
 
-        this.allSum = null
+        this.cartCont = document.querySelector('.cart')
 
-        this.allAmount = null
+        this.allSum = document.querySelector('.allsum')
 
-        this.url = "getBasket.json"
+        this.closeCart = document.querySelector('.cart__close')
+
+        this.showCart = document.querySelector('.btn-cart')
+
+        this.Quantity = document.querySelector('.allquantity')
+
+        this.Amount = document.querySelector('.amount')
 
         this._init()
 
@@ -28,22 +32,28 @@ class Cart {
 
         await this._fetchGoodsInCart()
 
-        this.calcAllSumm()
+        this._addcalc()
 
-        this.calcAllAmount()
+        this._handler()
+
+    }
+
+    _addcalc() {
+
+        this.allSum.innerHTML = this.calcAllCart().allSum
+
+        this.Quantity.innerHTML = this.calcAllCart().allQuantity
+
+        this.Amount.innerHTML = this.calcAllCart().allQuantity
 
         this.rander()
-
     }
 
     async _fetchGoodsInCart() {
 
-
-        let res = await fetch(baseURL + this.url)
+        let res = await fetch(constants.cart)
 
         res = await res.json()
-
-        console.log(res)
 
         this._goodsInCart = res.contents
 
@@ -63,39 +73,105 @@ class Cart {
 
     }
 
- 
-    addToCart(good) {
 
-        console.log(good)
+    async addToCart(good) {
 
-        if (!this._isInCartId(good.id)) {
+        let res = await fetch(constants.addCart)
+
+        res = await res.json()
+
+        if (!this._isInCartId(good.id) && res.result === 1) {
 
             good.quantity = 1
 
-            this.prodCart.push(good)
+            this._goodsInCart.push(good)
 
-           
+            this._addcalc()
 
-        } else {
-            let index = this._indexInCartId(good.id)
-            this.prodCart[index].quantity++
         }
-
-        this.rander()
 
     }
 
-    // removing good((with id = id)) from the cart
+    async removeFromCart(good) {
 
-    removeFromCart(id) { }
+        let res = await fetch(constants.delCart)
 
-    //claer  all cart 
+        res = await res.json()
 
-    claerCart() { }
+        if (this._isInCartId(good.id) && res.result === 1) {
 
-    calcAllAmount() { }
+            let index = this._indexInCartId(good.id)
 
-    calcAllSumm() { }
+            this._goodsInCart.splice(index, 1)
+
+            this._addcalc()
+        }
+
+
+    }
+
+    async incCart(id) {
+
+        let res = await fetch(constants.addCart)
+
+        res = await res.json()
+
+
+        if (this._isInCartId(id) && res.result === 1) {
+
+
+            let index = this._indexInCartId(id)
+
+            this._goodsInCart[index].quantity++
+
+            this._addcalc()
+        }
+
+    }
+
+    async decCart(id) {
+
+        let res = await fetch(constants.delCart)
+
+        res = await res.json()
+
+        if (this._isInCartId(id) && res.result === 1) {
+
+            let index = this._indexInCartId(id)
+
+            if (this._goodsInCart[index].quantity == 1) {
+
+                this._goodsInCart.splice(index, 1)
+            }
+            else {
+                this._goodsInCart[index].quantity--
+            }
+            this._addcalc()
+        }
+
+    }
+
+    async claerCart() {
+
+        let res = await fetch(constants.delCart)
+
+        res = await res.json()
+
+        if (res.result === 1) {
+
+            this._goodsInCart = []
+            this._addcalc()
+        }
+    }
+
+    calcAllCart() {
+
+        return {
+            allQuantity: this._goodsInCart.reduce((start, good) => start + good.quantity, 0),
+
+            allSum: this._goodsInCart.reduce((start, good) => start + good.quantity * good.price, 0),
+        }
+    }
 
     _isInCartId(id) {
 
@@ -109,7 +185,43 @@ class Cart {
 
     }
 
-}
+    _handler() {
 
+        this.cartCont.addEventListener('click', (e) => {
+
+            if (e.target.dataset.inc) {
+
+                let id = e.target.dataset.inc
+
+                this.incCart(id)
+            }
+
+            if (e.target.dataset.dec) {
+
+                let id = e.target.dataset.dec
+
+                this.decCart(id)
+            }
+
+            if (e.target.id === "claerCart") {
+
+                this.claerCart()
+            }
+
+        })
+
+        let hidenShowCart = (function () {
+
+            this.cartCont.classList.toggle('cart-active')
+
+        }).bind(this)
+
+        this.closeCart.addEventListener('click', hidenShowCart)
+
+        this.showCart.addEventListener('click', hidenShowCart)
+
+    }
+
+}
 
 export default Cart

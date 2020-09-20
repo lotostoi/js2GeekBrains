@@ -5,10 +5,10 @@ class Good {
 
     constructor(good, img = 'http://placehold.it/150x200/') {
 
-        let { id_product, product_name, price } = good
+        let { id, title, price } = good
 
-        this.id = id_product
-        this.title = product_name
+        this.id = id
+        this.title = title
         this.price = price
         this.img = img
     }
@@ -20,7 +20,7 @@ class Good {
                         <h3>${this.title}</h3>
                         <p>${this.price} \u20bd</p>
                         <button class="addToCart" data-id="${this.id}">Add to cart</button>
-                        <button class="dellFromCart" data-id="${this.id}">Del from cart</button>
+                        <button class="dellFromCart" data-id="${this.id}">Remove</button>
                     </div>
                 </div>`;
     }

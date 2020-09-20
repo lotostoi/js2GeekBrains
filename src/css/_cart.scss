@@ -35,6 +35,8 @@
     }
 
     &__body {
+
+
         position: relative;
 
         -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -44,9 +46,13 @@
         flex-direction    : column;
         width             : 50vw;
 
+        max-height: 70vh;
+
         padding         : 20px;
         box-sizing      : border-box;
         background-color: rgb(17, 171, 218);
+
+        overflow-y: auto;
 
 
         &>hr {
@@ -100,7 +106,7 @@
     }
 
     &__prodact {
-        margin: 5px 0;
+        margin : 5px 0;
         display: flex;
         width  : 100%;
     }
@@ -115,13 +121,13 @@
         align-items    : center;
         width          : 20%;
     }
-    
+
     &__quantity {
-        & > span {
+        &>span {
             margin: 0 10px;
         }
     }
- 
+
 
     &__resalts {
 

@@ -4,7 +4,7 @@ import constants from "./constants"
 import getRequest from "./toPromis"
 
 
-let baseURL = constants.baseURL
+
 
 class ListGoods {
 
@@ -15,8 +15,6 @@ class ListGoods {
         this._goods = []
 
         this.allGoods = []
-
-        this.url = baseURL + 'catalogData.json'
 
         this.resolve
 
@@ -41,7 +39,7 @@ class ListGoods {
 
     async _fetchGoods() {
 
-        let res = await getRequest(this.url)
+        let res = await getRequest(constants.catalog)
         this._goods = await JSON.parse(res)
 
 
@@ -69,9 +67,15 @@ class ListGoods {
 
                 let id = e.target.dataset.id
 
-
-
                 this.cart.addToCart(this.allGoods.find(good => good.id.toString() === id.toString()))
+
+            }
+
+            if (e.target.className === 'dellFromCart') {
+
+                let id = e.target.dataset.id
+
+                this.cart.removeFromCart(this.allGoods.find(good => good.id.toString() === id.toString()))
 
             }
 

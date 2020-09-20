@@ -1,5 +1,13 @@
+
+const baseURL = 'https://raw.githubusercontent.com/lotostoi/js2GeekBrains/lesson3/responses/'
+
+
 const constants = {
-    baseURL : 'https://raw.githubusercontent.com/lotostoi/js2GeekBrains/lesson3/responses/'
+    catalog: baseURL + 'catalogData.json',
+    cart: baseURL + 'getBasket.json',
+    addCart: baseURL + 'addToBasket.json',
+    delCart: baseURL + 'deleteFromBasket.json',
+
 }
 
 export default constants

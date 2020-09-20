@@ -7,7 +7,7 @@ class GoodInCart extends Good {
 
         super(goodInCart, img)
 
-        this.amount = goodInCart.quantity
+        this.quantity = goodInCart.quantity
     }
 
     rander() {
@@ -26,13 +26,13 @@ class GoodInCart extends Good {
 
                     <span class="cart__price" data-price="${this.id}">${this.price}\u20bd</span>
 
-                    <span class="cart__all-price" data-all-price="${this.id}">${this.amount * this.price} \u20bd</span>
+                    <span class="cart__all-price" data-all-price="${this.id}">${this.quantity * this.price} \u20bd</span>
 
                     <div class="cart__quantity">
 
                         <button data-inc="${this.id}"> + </button>
 
-                        <span data-quantity="${this.id}">${this.amount}</span>
+                        <span data-quantity="${this.id}">${this.quantity}</span>
 
                         <button data-dec="${this.id}"> - </button>
 
