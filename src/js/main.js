@@ -1,4 +1,7 @@
 
+
+
+
 class Good {
 
     constructor(good, img = 'http://placehold.it/150x200/') {
