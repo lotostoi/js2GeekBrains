@@ -1,12 +1,42 @@
 [
   {
     "id_product": 123,
-    "product_name": "Ноутбук",
+    "product_name": "Refrigerator",
     "price": 45600
   },
   {
     "id_product": 456,
-    "product_name": "Мышка",
+    "product_name": "Keyboard",
+    "price": 2000
+  },git
+  {
+    "id_product": 345,
+    "product_name": "Phon",
+    "price": 45600
+  },
+  {
+    "id_product": 898,
+    "product_name": "Computer",
     "price": 1000
+  },
+  {
+    "id_product": 457,
+    "product_name": "Memmory",
+    "price": 45600
+  },
+  {
+    "id_product": 232,
+    "product_name": "Netbook",
+    "price": 23657
+  },
+  {
+    "id_product": 555,
+    "product_name": "Monitor",
+    "price": 33000
+  },
+  {
+    "id_product": 456,
+    "product_name": "Cooker",
+    "price": 555000
   }
 ]
