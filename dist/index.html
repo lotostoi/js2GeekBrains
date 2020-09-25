@@ -1,1 +1,45 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Интернет-магазин</title></head><body><div class="cart"><div class="cart__body"><span class="cart__close">x</span><h1>Cart</h1><hr><div class="cart__headerBody"><p class="colImage">Image</p><p class="colTitle">Title</p><p class="colPrice">Price</p><p class="colAllPrice">allPrice</p><p class="colQuantity">Quantity</p></div><div class="cart__products"></div><hr><div class="cart__resalts"><p class="cart__allQuantity"><strong>All quantity </strong><span class="allquantity">0</span></p><p class="cart__allSum"><strong>All sum </strong><span class="allsum">0</span></p><button id="claerCart">Clear cart</button></div></div></div><div class="wrapper"><header><a href="index.html" class="logo">Js2 </a><button class="btn-cart" type="button">Корзина <span class="amount"></span></button></header><main><div class="products"></div></main></div><script src="./js/main.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Contact us</h1>
+        </h1>
+        <form class="mt-5" id="form">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Name:</label>
+                <input type="text" class="form-control" id="exampleInputEmail1" name="name">
+                <small data-field="name" class="form-text text-danger invis fontSize"> Minimum length name is 3</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Phone:</label>
+                <input type="phone" class="form-control" id="exampleInputEmail1" name="phone">
+                <small data-field="phone" class="form-text text-danger invis fontSize"> Required format:
+                    +7(000)000-0000</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address:</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+                <small data-field="email" class="form-text  text-danger invis fontSize">Required format : mymail@mail.ru
+                    or my.mail@mail.ru or my-mail@mail.ru.</small>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Messege:</label>
+                <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <small data-field="text" class="form-text text-danger invis fontSize"> Minimum length messege is 3
+                </small>
+            </div>
+            <button type="submit" id="formSubmit" class="btn btn-primary disabled" disabled>Sent</button>
+        </form>
+
+    </div>
+<script src="./js/main.js"></script></body>
+
+</html>

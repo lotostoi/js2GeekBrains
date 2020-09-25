@@ -1,35 +1,85 @@
-
 import "../css/style.scss"
 
-import ListGoods from "./ListGoods"
+let d = document
 
+class Form {
+    constructor(idForm, idSubmit) {
 
+        this.form = d.querySelector(idForm)
+        this.submit = this.form.querySelector(idSubmit)
+        this.regExps = {
+            name: ['\\w{3,30}', 'i'],
+            phone: ['^[+]\\d{1}[(]\\d{3}[)]\\d{3}\-\\d{4}$'],
+            email: ['^\\S+@mail.ru$', 'i'],
+            text: ['\\w{3,}', 'i'],
+        }
+        this.fields = []
 
+        this._init()
+      
+    }
 
+    _init() {
+        this._createForm()
+        this._handler()
+    }
+    
+    _createForm() {
 
+        let form = this.fields = [...this.form.querySelectorAll('input, textarea')]
 
-const cotalog = new ListGoods()
+        this.fields = form.map(field => {
+       
+            return {
+                el: field,
+                messegeEl: this.form.querySelector(`small[data-field = "${field.name}"]`),
+                regE: this.regExps[`${field.name}`],
+                valid: false
 
+            }
+        })
 
-/* const cartWrapper = document.querySelector('.cart')
+    }
+    _validForm() {
+        if (this.fields.some(field => !field.valid)) {
+            this.submit.classList.add('disabled')
+            this.submit.setAttribute('disabled', true)
+           
+        } else {
+            this.submit.classList.remove('disabled')
+            this.submit.removeAttribute('disabled')
+        
+        }
+    }
+    _handler() {
 
-const closeCart = document.querySelector('.cart__close')
+        this.form.addEventListener('input', (e) => {
 
-const showCart = document.querySelector('.btn-cart')
+            if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
 
+                let field = this.fields.filter(field => field.el.name === e.target.name)[0]
 
-const hidenShowCart = (e) => {
+                if (new RegExp(...field.regE).test(field.el.value)) {
 
-    cartWrapper.classList.toggle('cart-active')
+                    field.el.classList.add('valid')
+                    field.el.classList.remove('error')                      
+                    field.messegeEl.classList.add('invis')
+                    field.valid = true   
+                    this._validForm()
 
+                } else {
+
+                    field.el.classList.remove('valid')
+                    field.el.classList.add('error')
+                    field.messegeEl.classList.remove('invis')
+                    field.valid = false
+                    this._validForm()
+                }
+
+            }
+        })
+    }
 }
 
-closeCart.addEventListener('click', hidenShowCart)
 
-showCart.addEventListener('click', hidenShowCart)
- */
-
-
-
-
-
+new Form('#form', '#formSubmit')

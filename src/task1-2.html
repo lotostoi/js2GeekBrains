@@ -45,6 +45,8 @@
 
         let exemple = document.querySelector('.exemple > pre').innerHTML
 
+        // Непонятно, текст многострочный но работает как то  без флага?
+
         document.querySelector('.task1 > pre').innerHTML = exemple.replace(new RegExp('\'', 'g'), '\"')
 
         document.querySelector('.task2 > pre').innerHTML = exemple
