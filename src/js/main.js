@@ -8,7 +8,7 @@ class Form {
         this.form = d.querySelector(idForm)
         this.submit = this.form.querySelector(idSubmit)
         this.regExps = {
-            name: ['\\w{3,30}', 'i'],
+            name: ['[a-zA-Z]{3,30}', 'i'],
             phone: ['^[+]\\d{1}[(]\\d{3}[)]\\d{3}\-\\d{4}$'],
             email: ['^\\S+@mail.ru$', 'i'],
             text: ['\\w{3,}', 'i'],
