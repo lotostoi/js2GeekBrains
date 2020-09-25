@@ -1,6 +1,8 @@
 
 import "../css/style.scss"
 
+import 'bootstrap'
+
 import ListGoods from "./ListGoods"
 
 
