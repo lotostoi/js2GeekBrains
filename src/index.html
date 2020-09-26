@@ -13,7 +13,7 @@
 
         <top v-on:showpage="toPage($event)" v-on:search="search" :count="countCart.quantity"></top>
 
-        <!-- надо ротре сюда)) -->
+        <!-- надо роутре сюда)) -->
         <about-shop v-if="pages[0].active"></about-shop>
         <myform v-if="pages[2].active"> </myform>
         <products v-if="pages[1].active" :products="catalog" :message="messagAboutSearch" @addtocart="addToCart($event)"
