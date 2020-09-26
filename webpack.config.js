@@ -6,34 +6,40 @@ const HTML = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-    context: path.resolve(__dirname, 'src'),
-    entry: "./js/main.js",
-    mode: 'development',
-    output: {
-        filename: "./js/main.js",
-        path: path.resolve(__dirname, 'dist'),
+  context: path.resolve(__dirname, 'src'),
+  // runtimeCompiler: true,
+  entry: "./js/main.js",
+  mode: 'development',
+  output: {
+    filename: "./js/main.js",
+    path: path.resolve(__dirname, 'dist'),
 
+  },
+  resolve: {
+    alias: {
+      vue: 'vue/dist/vue.js'
     },
-    plugins: [
-        new HTML({
-            template: "./index.html"
-        }),
-       // new CleanWebpackPlugin()
-    ],
-    module: {
-        rules: [
-            {
-                test: /\.s[ac]ss$/i,
-                use: [
-                    // Creates `style` nodes from JS strings
-                    'style-loader',
-                    // Translates CSS into CommonJS
-                    'css-loader',
-                    // Compiles Sass to CSS
-                    'sass-loader',
-                ],
-            },
+  },
+  plugins: [
+    new HTML({
+      template: "./index.html"
+    }),
+    // new CleanWebpackPlugin()
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'sass-loader',
         ],
-    },
+      },
+    ],
+  },
 
 }

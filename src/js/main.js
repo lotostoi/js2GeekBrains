@@ -1,85 +1,132 @@
 import "../css/style.scss"
 
-let d = document
+import Vue from 'vue'
+import top from './header.js'
+import bot from './bot.js'
+import products from './prodacts'
+import myform from './form'
+import aboutShop from './aboutShop'
+import cart from './cart'
+import pathes from "./pathes"
 
-class Form {
-    constructor(idForm, idSubmit) {
+(async () => {
+    let cartFromServer = fetch(pathes.cart)
+    let res = await fetch(pathes.catalog)
+    let goods = (await res.json()).map(prod => ({ ...prod, link: 'http://placehold.it/150x100/', inCart: false }))
 
-        this.form = d.querySelector(idForm)
-        this.submit = this.form.querySelector(idSubmit)
-        this.regExps = {
-            name: ['[a-zA-Z]{3,30}', 'i'],
-            phone: ['^[+]\\d{1}[(]\\d{3}[)]\\d{3}\-\\d{4}$'],
-            email: ['^\\S+@mail.ru$', 'i'],
-            text: ['\\w{3,}', 'i'],
-        }
-        this.fields = []
 
-        this._init()
-      
-    }
+    new Vue({
+        el: '#el',
 
-    _init() {
-        this._createForm()
-        this._handler()
-    }
-    
-    _createForm() {
+        components: { top, products, bot, myform, aboutShop, cart },
 
-        let form = this.fields = [...this.form.querySelectorAll('input, textarea')]
+        data: {
+            fromServerProducts: goods,
+            catalog: [],
+            cart: [],
+            messagAboutSearch: '',
+            pages: [
+                { name: 'Main', active: true },
+                { name: 'Products', active: false },
+                { name: 'Contacts us', active: false },
+                { name: 'Cart', active: false },
+            ]
+        },
+        methods: {
+            toPage(e) {
+                this.pages.forEach(p => {
+                    p.name === e ? (p.active = true) : (p.active = false)
+                })
+            },
+            search(e) {
+                this.toPage('Products')
+                if (e !== '') {
+                    let newCatalog = this.fromServerProducts.filter(p => p && p.title.toLowerCase().includes(e.toLowerCase()))
+                    if (newCatalog.length > 0) {
+                        this.catalog = newCatalog
+                    } else {
+                        this.catalog = newCatalog
+                        this.messagAboutSearch = `Nothing found for "${e} ..." `
+                    }
+                }
+                else {
+                    this.catalog = this.fromServerProducts
+                }
+            },
+            // По хорошему тут нужен склад  
+            async addToCart(id) {
 
-        this.fields = form.map(field => {
-       
-            return {
-                el: field,
-                messegeEl: this.form.querySelector(`small[data-field = "${field.name}"]`),
-                regE: this.regExps[`${field.name}`],
-                valid: false
+                let res = await fetch(pathes.addCart)
+                res = await res.json()
 
-            }
-        })
+                if ( res.result === 1) {
 
-    }
-    _validForm() {
-        if (this.fields.some(field => !field.valid)) {
-            this.submit.classList.add('disabled')
-            this.submit.setAttribute('disabled', true)
-           
-        } else {
-            this.submit.classList.remove('disabled')
-            this.submit.removeAttribute('disabled')
-        
-        }
-    }
-    _handler() {
+                    let index = this.cart.findIndex(prod => prod.id == id)
+                    let prod = this.catalog.find(prod => prod.id == id)
 
-        this.form.addEventListener('input', (e) => {
+                    if (index !== -1) {
+                        Vue.set(this.cart[index], 'quantity', ++this.cart[index].quantity)
+                    } else {
+                        this.cart.push({ ...prod, quantity: 1 })
+                        Vue.set(this.catalog[this.catalog.findIndex(prod => prod.id == id)], 'inCart', true)
 
-            if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") {
-
-                let field = this.fields.filter(field => field.el.name === e.target.name)[0]
-
-                if (new RegExp(...field.regE).test(field.el.value)) {
-
-                    field.el.classList.add('valid')
-                    field.el.classList.remove('error')                      
-                    field.messegeEl.classList.add('invis')
-                    field.valid = true   
-                    this._validForm()
-
-                } else {
-
-                    field.el.classList.remove('valid')
-                    field.el.classList.add('error')
-                    field.messegeEl.classList.remove('invis')
-                    field.valid = false
-                    this._validForm()
+                    }
                 }
 
-            }
-        })
-    }
-}
+            },
+
+            async removeFromCart(id) {
+
+                let res = await fetch(pathes.delCart)
+                res = await res.json()
+
+                if ( res.result === 1) {
+
+                    let index = this.cart.findIndex(prod => prod.id == id)
+                    let prod = this.cart.find(prod => prod.id == id)
+                    if (+prod.quantity === +1) {
+                        this.cart.splice(index, 1)
+                        Vue.set(this.catalog[this.catalog.findIndex(prod => prod.id == id)], 'inCart', false)
+                    } else {
+                        Vue.set(this.cart[index], 'quantity', --this.cart[index].quantity)
+                    }
+                }
+            },
 
 
-new Form('#form', '#formSubmit')
+        },
+        computed: {
+
+            countCart() {
+                return {
+                    quantity: this.cart.reduce((start, prod) => start + prod.quantity, 0),
+                    sum: this.cart.reduce((start, prod) => start + prod.quantity * prod.price, 0)
+                }
+            },
+
+        },
+
+
+
+        async created() {
+            this.catalog = this.fromServerProducts
+            let cart = await cartFromServer
+            let { contents } = await cart.json()
+            this.cart = contents.map(prod => ({ ...prod, link: 'http://placehold.it/100x100/' }))
+
+            this.cart.forEach(p => {
+                this.catalog.forEach((pr, i) => {
+                    if (pr.id == p.id) {
+
+                        Vue.set(this.catalog[i], 'inCart', true)
+                    }
+
+                })
+
+            })
+        }
+    })
+
+})()
+
+

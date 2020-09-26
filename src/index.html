@@ -9,35 +9,18 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="mt-5">Contact us</h1>
-        </h1>
-        <form class="mt-5" id="form">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="name">
-                <small data-field="name" class="form-text text-danger invis fontSize"> Minimum length name is 3</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Phone</label>
-                <input type="phone" class="form-control" id="exampleInputEmail1" name="phone">
-                <small data-field="phone" class="form-text text-danger invis fontSize"> Required format:
-                    +7(000)000-0000</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email">
-                <small data-field="email" class="form-text  text-danger invis fontSize">Required format : mymail@mail.ru
-                    or my.mail@mail.ru or my-mail@mail.ru.</small>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="3"></textarea>
-                <small data-field="text" class="form-text text-danger invis fontSize"> Minimum length messege is 3
-                </small>
-            </div>
-            <button type="submit" id="formSubmit" class="btn btn-primary disabled" disabled>Sent</button>
-        </form>
+    <div class="container" id="el">
+
+        <top v-on:showpage="toPage($event)" v-on:search="search" :count="countCart.quantity"></top>
+
+        <!-- надо ротре сюда)) -->
+        <about-shop v-if="pages[0].active"></about-shop>
+        <myform v-if="pages[2].active"> </myform>
+        <products v-if="pages[1].active" :products="catalog" :message="messagAboutSearch" @addtocart="addToCart($event)"
+            @removefromcart="removeFromCart($event)"></products>
+        <cart v-if="pages[3].active" :products="cart" @addtocart="addToCart($event)"
+            @removefromcart="removeFromCart($event)" :count="countCart"></cart>
+        <bot></bot>
 
     </div>
 </body>
