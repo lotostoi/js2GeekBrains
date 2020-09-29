@@ -1,4 +1,6 @@
 import Vue from 'vue'
+
+import {mapGetters, mapActions} from "vuex"
 export default Vue.component('prod', {
     template: `
             <tr class="row ml-auto mr-auto mt-2" style="border-bottom:1px solid lightgray; ">
@@ -9,9 +11,9 @@ export default Vue.component('prod', {
                 <td class="col-2 ml-auto mr-auto cent">{{prod.price}} \u20bd</td>
                 <td class="col-2 ml-auto mr-auto cent">{{prod.price * prod.quantity}} \u20bd</td>
                 <td class="col-2 ml-auto mr-auto cent">  
-                    <button class="btn btn-warning" type="submit" @click="$emit('removefromcart', prod.id)">-</button>      
+                    <button class="btn btn-warning" type="submit" @click="delFromCart(prod.id)">-</button>      
                     <div class="ml-1 mr-1 cent"> <span>{{prod.quantity}}</span> </div>
-                    <button class="btn btn-warning" type="submit" @click="$emit('addtocart', prod.id)">+</button>
+                    <button class="btn btn-warning" type="submit" @click="addToCart(prod.id)">+</button>
                 </td>
             </tr>   
     `,
@@ -20,6 +22,17 @@ export default Vue.component('prod', {
             type: Object,
             required: true
         }
-    }
+    },
+    computed: {
+        ...mapGetters({
+            catalog:['catalog/catalog']
+        })
+    },
+    methods: {
+        ...mapActions({
+            addToCart:'cart/incCart',
+            delFromCart:'cart/decCart',   
+        })
+    },
 
 })

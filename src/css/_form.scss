@@ -1,4 +1,3 @@
-
 .invis {
     display: none;
 }
@@ -6,41 +5,53 @@
 .disabled {
     cursor: not-allowed;
 }
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 15px;
+    color: rgb(34, 34, 34);
+    text-decoration: none;
+    &:hover {
+        background-color: rgb(224, 205, 223);
+        text-decoration: none;
+    }
+}
+.link-active {
+    background-color: rgba(240, 184, 111, 0.904);
+}
 
 .valid {
     -webkit-box-shadow: 0px 0px 4px 1px rgba(7, 230, 15, 1) !important;
-    -moz-box-shadow   : 0px 0px 4px 1px rgba(7, 230, 15, 1) !important;
-    box-shadow        : 0px 0px 4px 1px rgba(7, 230, 15, 1);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(7, 230, 15, 1) !important;
+    box-shadow: 0px 0px 4px 1px rgba(7, 230, 15, 1);
 }
 
 .error {
     -webkit-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-    -moz-box-shadow   : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-    box-shadow        : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+    -moz-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+    box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
 }
 
 .fontSize {
     font-size: 15px !important;
 }
 
-
-
-
-
 .center {
     justify-content: space-evenly;
 }
 
 .cent {
-    display        : flex;
+    display: flex;
     justify-content: center;
-    align-items    : center;
-    border         : none !important;
+    align-items: center;
+    border: none !important;
 }
 
 .body {
-    border    : 1px solid rgba(128, 128, 128, 0.507) !important;
-    height    : calc(100vh - 116px);
+    border: 1px solid rgba(128, 128, 128, 0.507) !important;
+    height: calc(100vh - 116px);
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -50,18 +61,17 @@
 }
 
 .but-active {
-    border-color      : rgba(240, 110, 87, 0.897);
+    border-color: rgba(240, 110, 87, 0.897);
     -webkit-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-    -moz-box-shadow   : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-    box-shadow        : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-    background-color  : rgba(240, 110, 87, 0.774);
+    -moz-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+    box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+    background-color: rgba(240, 110, 87, 0.774);
 
     &:focus {
-        border-color      : rgba(240, 110, 87, 0.897);
+        border-color: rgba(240, 110, 87, 0.897);
         -webkit-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-        -moz-box-shadow   : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-        box-shadow        : 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
-        background-color  : rgba(240, 110, 87, 0.774);
+        -moz-box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+        box-shadow: 0px 0px 4px 1px rgba(230, 9, 9, 1) !important;
+        background-color: rgba(240, 110, 87, 0.774);
     }
 }
-

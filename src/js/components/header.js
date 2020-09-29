@@ -1,4 +1,9 @@
 import Vue from 'vue'
+
+import { mapGetters } from 'vuex'
+
+import filt from '@/js/components/search'
+
 export default Vue.component('top', {
     template: `
     <nav class="navbar navbar-expand-lg navbar-light border rounded bg-light" >
@@ -7,26 +12,25 @@ export default Vue.component('top', {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto border rounded">
 
-                <li v-for="field,i in fields" :key="i"  class="nav-item" :class= "field.active ? 'active-link' :''">
-                    <a v-if="field.name !=='Cart'" class="nav-link" @click="active(field.name)" href="#">{{field.name}}</a>
-                </li>
-            
+                <router-link :to="{name: 'main'}" class ="link"  exact active-class="link-active">Main</router-link> 
+                <router-link :to="{name: 'catalog'}" class ="link"  exact active-class="link-active">Products</router-link> 
+                <router-link :to="{name: 'form'}" class ="link"  exact active-class="link-active">Contacts us</router-link> 
+                 
             </ul>
-            <form class="form-inline my-2 my-lg-0" id = "filter"  v-on:submit.prevent="search">
-                <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" v-model = "searchValue">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> 
-            <button type="button" class="btn btn-secondary ml-3" :class ="fields[3].active ? 'but-active' :''"  @click="active('Cart')">
-               Cart<span class="badge badge-light ml-3">{{count}}</span>
-            </button>   
+            <filt></filt>
+            <router-link :to="{name: 'cart'}">
+                <button type="button" class="btn btn-secondary ml-3">
+                   Cart<span class="badge badge-light ml-3">{{quantity}}</span>
+               </button>  
+            </router-link> 
+       
         </div>
     </nav> 
     `,
-    props: {
-        count: {
-            type: Number,
-        }
+    components: {
+        filt
     },
+
     data: () => ({
         searchValue: '',
         fields: [
@@ -38,20 +42,25 @@ export default Vue.component('top', {
     }),
     methods: {
         active(e) {
-           
+
             this.fields.forEach((f, i) => {
                 (e === f.name) ?
                     (Vue.set(this.fields[i], 'active', true) && this.$emit('showpage', f.name)) :
                     Vue.set(this.fields[i], 'active', false)
             })
         },
-        search() { 
+        search() {
             this.active("Products")
-            this.$emit('search',  this.searchValue )
-        }
+            this.$emit('search', this.searchValue)
+        },
 
 
     },
+    computed: {
+        ...mapGetters({
+            quantity: ['cart/quantity'],
+        })
+    }
 
 
 

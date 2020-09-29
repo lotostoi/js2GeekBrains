@@ -17,19 +17,20 @@ module.exports = {
 
   },
   resolve: {
+    extensions: [".js"],
     alias: {
-      vue: 'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js',
+      "~": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "src"),
     },
   },
- 
-
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/i,
         use: [
           // fallback to style-loader in development
-          process.env.NODE_ENV !== 'production'
+           process.env.NODE_ENV !== 'production'
             ? 'style-loader'
             : MiniCssExtractPlugin.loader,
           'css-loader',
@@ -39,6 +40,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
@@ -49,6 +51,9 @@ module.exports = {
       template: "./index.html"
     }),
   ],
-  
-
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 4000
+  }
 }

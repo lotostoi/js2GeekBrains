@@ -1,6 +1,8 @@
 import Vue from 'vue'
 
-import prod from './prodInCart'
+import prod from './components/prodInCart'
+
+import {mapGetters, mapActions} from "vuex"
 
 export default Vue.component('cart', {
     template: `
@@ -14,13 +16,13 @@ export default Vue.component('cart', {
                     <td class="col-2 ml-auto mr-auto cent"><strong>All price</strong></td>
                     <td class="col-2 ml-auto mr-auto cent"><strong>Quantity</strong></td>     
                 </tr>
-                <prod v-for="prod in products" :prod='prod' :key="prod.name" @addtocart="$emit('addtocart', $event)" @removefromcart="$emit('removefromcart', $event)"/>
+                <prod v-for="prod in  goodsInCart" :prod='prod' :key="prod.name" @addtocart="$emit('addtocart', $event)" @removefromcart="$emit('removefromcart', $event)"/>
                 <tr class="row ml-auto mr-auto mt-2" style="border-bottom:1px solid lightgray; ">
                     <td class="col-2 ml-auto mr-auto cent"></td>
                     <td class="col-2 ml-auto mr-auto cent"></td>
                     <td class="col-2 ml-auto mr-auto cent"><strong>Result:</strong></td>
-                    <td class="col-2 ml-auto mr-auto cent"><strong>{{count.sum}} \u20bd</strong></td>
-                    <td class="col-2 ml-auto mr-auto cent"><strong>{{count.quantity}}</strong></td>     
+                    <td class="col-2 ml-auto mr-auto cent"><strong>{{sum}} \u20bd</strong></td>
+                    <td class="col-2 ml-auto mr-auto cent"><strong>{{quantity}}</strong></td>     
                 </tr>
            
                 </tbody>
@@ -28,7 +30,7 @@ export default Vue.component('cart', {
     </div> 
     `,
     props: {
-        products: {
+/*         products: {
             type: Array,
             required: true
         },
@@ -38,10 +40,17 @@ export default Vue.component('cart', {
         count: {
             type: Object,
             required:true
-        }
+        } */
     },
     componets: {
         prod
+    },
+    computed: {
+        ...mapGetters({
+            goodsInCart:['cart/cart'],
+            sum:['cart/sum'],
+            quantity:['cart/quantity'],
+        })
     },
     mounted() {
 
