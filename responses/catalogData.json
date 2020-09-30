@@ -1,0 +1,42 @@
+[
+  {
+    "id": 123,
+    "title": "Refrigerator",
+    "price": 45600
+  },
+  {
+    "id": 456,
+    "title": "Keyboard",
+    "price": 2000
+  },
+  {
+    "id": 345,
+    "title": "Phon",
+    "price": 45600
+  },
+  {
+    "id": 898,
+    "title": "Computer",
+    "price": 1000
+  },
+  {
+    "id": 457,
+    "title": "Memmory",
+    "price": 45600
+  },
+  {
+    "id": 232,
+    "title": "Netbook",
+    "price": 23657
+  },
+  {
+    "id": 555,
+    "title": "Monitor",
+    "price": 33000
+  },
+  {
+    "id": 456,
+    "": "Cooker",
+    "price": 555000
+  }
+]
