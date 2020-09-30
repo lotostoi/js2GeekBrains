@@ -3,15 +3,16 @@
 const path = require('path')
 const HTML = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin');
-
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+console.log(process.argv)
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
   entry: {
     index: "./js/main.js",
-    another: "./js/vue.js",
   },
   output: {
     publicPath: '/',
@@ -37,6 +38,21 @@ module.exports = {
         ],
       },
     ],
+  },
+  performance: {
+    hints: false
+  },
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: 'all',
+      minSize: 10000,
+      maxSize: 250000,
+    },
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+    ], 
   },
   plugins: [
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
