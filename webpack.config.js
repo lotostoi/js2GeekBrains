@@ -2,22 +2,24 @@
 
 const path = require('path')
 const HTML = require('html-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin');
 
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
-  // runtimeCompiler: true,
-  entry: "./js/main.js",
-  mode: 'development',
+  entry: {
+    index: "./js/main.js",
+    another: "./js/vue.js",
+  },
   output: {
-    filename: "./js/main.js",
+    publicPath: '/',
+    filename: "js/[name].bundle.js",
     path: path.resolve(__dirname, 'dist'),
-
   },
   resolve: {
-    extensions: [".js"],
+    // extensions: [".js"],
     alias: {
       vue: 'vue/dist/vue.js',
       "~": path.resolve(__dirname, "src"),
@@ -29,10 +31,7 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // fallback to style-loader in development
-           process.env.NODE_ENV !== 'production'
-            ? 'style-loader'
-            : MiniCssExtractPlugin.loader,
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader',
         ],
@@ -44,16 +43,22 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: './css/[name].css',
-      chunkFilename: './css/[id].css',
+      filename: 'css/[name].css',
+      chunkFilename: 'css/[id].css',
     }),
     new HTML({
       template: "./index.html"
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: '.htaccess' },
+      ],
+    }),
   ],
+  // devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    compress: true,
-    port: 4000
-  }
+    publicPath: '/',
+    contentBase: './dist',
+    historyApiFallback: true
+  },
 }

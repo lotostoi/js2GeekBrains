@@ -18,10 +18,10 @@ export default Vue.component('top', {
                  
             </ul>
             <filt></filt>
-            <router-link :to="{name: 'cart'}">
-                <button type="button" class="btn btn-secondary ml-3">
+            
+            <router-link :to="{name: 'cart'}" type="button" class="btn btn-secondary ml-3" exact active-class="but-active">
                    Cart<span class="badge badge-light ml-3">{{quantity}}</span>
-               </button>  
+               
             </router-link> 
        
         </div>

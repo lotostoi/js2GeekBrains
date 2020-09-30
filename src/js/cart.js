@@ -7,7 +7,7 @@ import {mapGetters, mapActions} from "vuex"
 export default Vue.component('cart', {
     template: `
     <div class="conteiner mt-1 mb-1 border border border-light rounded body">
-        <table class="table ">
+        <table v-if = "!loading" class="table ">
             <tbody>
                 <tr class="row ml-auto mr-auto mt-2" style="border-bottom:1px solid lightgray; ">
                     <td class="col-2 ml-auto mr-auto cent"><strong>Image</strong></td>
@@ -27,20 +27,15 @@ export default Vue.component('cart', {
            
                 </tbody>
         </table>
+        <div v-else class="m-auto   col-1">
+            <div class="spinner-grow mt-5" style="width: 7rem; height: 7rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>    
+        </div>
     </div> 
     `,
     props: {
-/*         products: {
-            type: Array,
-            required: true
-        },
-        message: {
-            type: String
-        },
-        count: {
-            type: Object,
-            required:true
-        } */
+
     },
     componets: {
         prod
@@ -50,6 +45,7 @@ export default Vue.component('cart', {
             goodsInCart:['cart/cart'],
             sum:['cart/sum'],
             quantity:['cart/quantity'],
+            loading:['cart/loading'],
         })
     },
     mounted() {

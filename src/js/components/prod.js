@@ -10,8 +10,8 @@ export default Vue.component('good', {
                     <div class="card-body">
                         <h5 class="card-title">{{prod.title}}</h5>
                         <h5 class="card-title">{{prod.price}}\u20bd </h5>
-                        <a v-if = "!inCart(prod.id)"  href="#" class="btn btn-primary" @click="addToCart(prod.id)" >Add to cart</a>
-                        <a v-else  href="#" class="btn btn-danger" @click="delFromCart(prod.id)" >Remove </a>
+                        <button v-if = "!inCart(prod.id)"  href="#" class="btn btn-primary" @click="addToCart(prod.id)" :disabled="cartLoading" >Add to cart</button>
+                        <button v-else  href="#" class="btn btn-danger" @click="delFromCart(prod.id)" :disabled="cartLoading" >Remove </button>
                     </div>
             </div>      
     `,
@@ -33,7 +33,8 @@ export default Vue.component('good', {
     },
     computed: {
         ...mapGetters({
-            inCart: ['catalog/inCart']
+            inCart: ['catalog/inCart'],
+            cartLoading:['cart/loading'],
         })
     },
 

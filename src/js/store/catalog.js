@@ -6,15 +6,17 @@ export default {
     state: {
         _catalog: [],
         catalog: [],
-        value: ''
+        value: '',
+        loading: true
     },
     getters: {
         catalog: state => state.catalog,
         value: state => state.value,
+        loading: state=> state.loading, 
         inCart: (state, getters, rootState, rootGetters) => id => rootGetters['cart/cart'].find(g => +g.id === +id)
     },
     mutations: {
-        getCatalog: (state, catalog) => state.catalog = state._catalog = catalog,
+        getCatalog: (state, catalog) => (state.catalog = state._catalog = catalog) && (state.loading = false),
         filter: (state, value) => {
             if (value !== '') {
                 state.catalog = state._catalog.filter(g => g && g.title.toLowerCase().includes(value.toLowerCase()))
@@ -26,7 +28,7 @@ export default {
         }
     },
     actions: {
-        async getCatalog({ commit }) {
+        async getCatalog({ commit, dispatch }) {
 
             try {
 
@@ -34,8 +36,8 @@ export default {
                 commit('getCatalog', data.map(prod => ({ ...prod, link: 'http://placehold.it/150x100/', inCart: false })))
 
             }
-            catch (e) {
-                console.log(e)
+            catch  {
+                dispatch('alerts/add',{text:"Error by getting goods. Please, reload  page... "}, {root:true})
             }
 
         },

@@ -6,19 +6,21 @@ export default {
     namespaced: true,
     state: {
 
-        cart: []
+        cart: [],
+        loading: true
 
     },
     getters: {
 
         cart: state => state.cart,
+        loading: state=> state.loading, 
         sum: state => state.cart.reduce((start, { price, quantity }) => start + price * quantity, 0),
         quantity: state => state.cart.reduce((start, { quantity }) => start + quantity, 0)
 
     },
     mutations: {
 
-        getCart: (state, cart) => state.cart = cart,
+        getCart: (state, cart) => (state.cart = cart) && (state.loading = false),
 
         incCart: (state, prod) => {
 
@@ -27,8 +29,7 @@ export default {
                 Vue.set(state.cart[index], 'quantity', ++state.cart[index].quantity)
             } else {
                 state.cart.push({ ...prod, quantity: 1 })
-              
-
+                
             }
 
         },
@@ -47,29 +48,54 @@ export default {
     },
     actions: {
 
-        async getCart({ commit }) {
+        async getCart({ commit, dispatch }) {
             try {
 
                 let data = await cartApi.all()
                 commit('getCart', data.map(prod => ({ ...prod, link: 'http://placehold.it/100x100/' })))
-                
+
             }
-            catch (e) {
-                console.log(e)
+            catch  {
+                  dispatch('alerts/add', { text: "Error by getting cart. Please, reload  page... " }, { root: true })
             }
 
         },
-        async incCart({ commit, rootGetters }, id) {
-          
-            let good = rootGetters['catalog/catalog'].find(g => +g.id === +id)
-            commit('incCart', good)
+        async incCart({ commit, rootGetters, dispatch }, id) {
+
+            try {
+
+                let data = await cartApi.inc()
+
+                if (+data === 1) {
+
+                let good = rootGetters['catalog/catalog'].find(g => +g.id === +id)
+                commit('incCart', good)
+                }
+
+            } catch (e) {
+              
+
+                dispatch('alerts/add', {timeout: 3000, text: "Error by adding of good from cart... Try again  " }, { root: true })
+
+            }
 
         },
-        async decCart({ commit, state }, id) {
-           
-            let good = state.cart.find(g => +g.id === +id)
+        async decCart({ commit, state, dispatch }, id) {
 
-            commit('decCart', good)
+            try {
+
+                let data = await cartApi.dec()
+
+                if (+data === 1) {
+                    let good = state.cart.find(g => +g.id === +id)
+                    commit('decCart', good)
+                }
+
+            } catch (e) {
+
+               dispatch('alerts/add', { timeout: 3000, text: "Error by delleting of good from cart... Try again  " }, { root: true })
+
+            }
 
         }
     }

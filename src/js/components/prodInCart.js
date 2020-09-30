@@ -11,9 +11,9 @@ export default Vue.component('prod', {
                 <td class="col-2 ml-auto mr-auto cent">{{prod.price}} \u20bd</td>
                 <td class="col-2 ml-auto mr-auto cent">{{prod.price * prod.quantity}} \u20bd</td>
                 <td class="col-2 ml-auto mr-auto cent">  
-                    <button class="btn btn-warning" type="submit" @click="delFromCart(prod.id)">-</button>      
+                    <button class="btn btn-warning" type="submit" @click="delFromCart(prod.id)" :disabled="catalogLoading">-</button>      
                     <div class="ml-1 mr-1 cent"> <span>{{prod.quantity}}</span> </div>
-                    <button class="btn btn-warning" type="submit" @click="addToCart(prod.id)">+</button>
+                    <button class="btn btn-warning" type="submit" @click="addToCart(prod.id)" :disabled="catalogLoading">+</button>
                 </td>
             </tr>   
     `,
@@ -25,7 +25,8 @@ export default Vue.component('prod', {
     },
     computed: {
         ...mapGetters({
-            catalog:['catalog/catalog']
+            catalog:['catalog/catalog'],
+            catalogLoading:['catalog/loading'],
         })
     },
     methods: {
