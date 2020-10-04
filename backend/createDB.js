@@ -2,7 +2,7 @@ const quantityGoods = 100
 
 const mongoose = require('mongoose')
 
-const { Schema, model } = require('mongoose')
+const ListGoods = require('./src/models/goods')
 
 const catalog = require('./src/dataForCreateCatalog')
 
@@ -14,33 +14,13 @@ const start = async () => {
 
         await mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true })
 
-        const good = new Schema({
-            title: {
-                type: String,
-                required: true
-            },
-            price: {
-                type: Number,
-                required: true
-            },
-            img: {
-                type: String,
-                required: true
-            },
-            description: {
-                type: String,
-                required: true
-            },
-
-        })
-
-        let modelGoods = model('ListGoods', good)
+        
 
         const goods = catalog(quantityGoods)
 
         for (let good of goods) {
 
-            await new modelGoods({
+            await new ListGoods({
                 title: good.title,
                 price: good.price,
                 img: good.img,
@@ -49,7 +29,7 @@ const start = async () => {
             console.log('+')
         }
         console.log('Date base has been craeted...')
-
+        mongoose.connection.close()
     }
     catch (e) {
         console.error(e)

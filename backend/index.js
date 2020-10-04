@@ -5,9 +5,7 @@ const isProd = process.isProduction
 const urlForProxy = isProd ? '/' : '/api/'
 
 const path = require('path')
-
 const bodyParser = require('body-parser');
-
 const express = require('express')
 const mongoose = require('mongoose')
 mongoose.set('useFindAndModify', false)
