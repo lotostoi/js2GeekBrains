@@ -1,0 +1,31 @@
+.spa-cont-good {
+    padding              : 20px 40px;
+    display              : flex;
+    flex-direction       : column;
+    width                : 100%;
+    border-radius        : 5px;
+
+}
+
+.spa-img {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.pageGood-price {
+    font-size: 20px;
+    margin: 0;
+}
+.pageGood-link {
+    display: flex;
+    font-size: 18px;
+    margin: 5px 0;
+} 
+.spa-loading-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+}

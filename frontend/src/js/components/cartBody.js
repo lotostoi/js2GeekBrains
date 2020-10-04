@@ -11,7 +11,7 @@ export default Vue.component('cart', {
             <table v-if = "!loading" class="table ">
 
                 <tbody>
-                    <tr class="row ml-auto mr-auto mt-2" style="border-bottom:1px solid lightgray; ">
+                    <tr class="row ml-auto mr-auto mt-2 statistics-header" style="border-bottom:1px solid lightgray; ">
                         <td class="col-2 ml-auto mr-auto cent"><strong>Image</strong></td>
                         <td class="col-2 ml-auto mr-auto cent"><strong>Title</strong></td>
                         <td class="col-2 ml-auto mr-auto cent"><strong>Price</strong></td>

@@ -51,12 +51,7 @@
     border: none !important;
 }
 
-.body {
-    border: 1px solid rgba(128, 128, 128, 0.507) !important;
-    height: calc(100vh - 116px);
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+
 
 .active-link {
     background-color: rgba(128, 128, 128, 0.377);

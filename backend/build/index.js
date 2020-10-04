@@ -130,16 +130,14 @@ module.exports = model('ListGoods', good)
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const PORT = 3000
+const PORT = 3050
 // for build
 const isProd = true
 
 const urlForProxy = isProd ? '/' : '/api/'
 
 const path = __webpack_require__(4)
-
 const bodyParser = __webpack_require__(5);
-
 const express = __webpack_require__(1)
 const mongoose = __webpack_require__(0)
 mongoose.set('useFindAndModify', false)
@@ -149,6 +147,7 @@ const listGoodsRout = __webpack_require__(6)
 const listCartRout = __webpack_require__(7)
 
 const app = express()
+
 const history = __webpack_require__(11);
 
 // need only in production

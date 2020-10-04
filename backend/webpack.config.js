@@ -42,6 +42,7 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: path.join(__dirname,'../frontend/dist'), to : 'static' },
+        { from: path.join(__dirname,'package.json') },
       ],
     }),
     new webpack.DefinePlugin({     

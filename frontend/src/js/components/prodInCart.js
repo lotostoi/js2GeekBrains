@@ -3,7 +3,7 @@ import Vue from 'vue'
 import { mapGetters, mapActions } from "vuex"
 export default Vue.component('prod', {
     template: `
-            <tr class="row ml-auto mr-auto mt-2" style="border-bottom:1px solid lightgray; ">
+            <tr class="row ml-auto mr-auto mt-2 statistics-list" style="border-bottom:1px solid lightgray; ">
                 <td class="col-2 ml-auto mr-auto cent">
                        <img class="card-img-top mt-2" :src="prod.link" :key="prod._id" style="width:100px; height:100px">
                 </td>

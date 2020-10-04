@@ -1,4 +1,4 @@
-const PORT = 3000
+const PORT = 3050
 // for build
 const isProd = process.isProduction
 
@@ -15,6 +15,7 @@ const listGoodsRout = require('./src/routers/listGoods')
 const listCartRout = require('./src/routers/listCart')
 
 const app = express()
+
 const history = require('connect-history-api-fallback');
 
 // need only in production

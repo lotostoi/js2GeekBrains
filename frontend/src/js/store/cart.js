@@ -14,7 +14,8 @@ export default {
         loading: state => state.loading,
         statistics: state => state.statistics,
         sum: state => state.cart.reduce((start, { price, quantity }) => start + price * quantity, 0),
-        quantity: state => state.cart.reduce((start, { quantity }) => start + quantity, 0)
+        quantity: state => state.cart.reduce((start, { quantity }) => start + quantity, 0),
+    
     },
     mutations: {
 

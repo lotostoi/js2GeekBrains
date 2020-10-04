@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 import good from './components/prod'
 
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters} from 'vuex'
 
 export default Vue.component('products', {
     template: `
@@ -39,6 +39,4 @@ export default Vue.component('products', {
     mounted() {
 
     }
-
-
 })

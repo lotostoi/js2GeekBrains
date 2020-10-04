@@ -9,6 +9,7 @@ import aboutShop from '@/js/aboutShop'
 import cart from '@/js/cart'
 import cartBody from '@/js/components/cartBody'
 import cartStatistics from '@/js/components/cartStatistics'
+import pageGood from '@/js/pageGood'
 
 
 const routes = [
@@ -22,6 +23,11 @@ const routes = [
         name: 'catalog',
         path: "/catalog",
         component: products
+    },
+    {
+        name: 'good',
+        path: '/catalog/:id',
+        component: pageGood
     },
     {
         path: "/cart",

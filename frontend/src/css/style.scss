@@ -19,6 +19,13 @@ main {
     display       : flex;
     flex-direction: column;
 }
+.body {
+    border    : 1px solid rgba(128, 128, 128, 0.507) !important;
+    height    : calc(100vh - 122px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 
 
 @import"global";
@@ -26,3 +33,5 @@ main {
 @import"form";
 @import"alerts";
 @import"cart";
+@import"pageGood";
+@import"prod";

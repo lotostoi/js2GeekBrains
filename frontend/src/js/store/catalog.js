@@ -13,7 +13,9 @@ export default {
         catalog: state => state.catalog,
         value: state => state.value,
         loading: state => state.loading,
-        inCart: (state, getters, rootState, rootGetters) => id => rootGetters['cart/cart'].find(g => g._id === id)
+        getGood: state => id => state._catalog.find(p=> p._id === id),
+        inCart: (state, getters, rootState, rootGetters) => id => rootGetters['cart/cart'].find(g => g._id === id),
+        quant: (state, getters, rootState, rootGetters) => id => rootGetters['cart/cart'].find(g => g._id === id).quantity,
     },
     mutations: {
         getCatalog: (state, catalog) => (state.catalog = state._catalog = catalog) && (state.loading = false),
