@@ -3,6 +3,10 @@
 const { Schema, model } = require('mongoose')
 
 const good = new Schema({
+    _id: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

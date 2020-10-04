@@ -9,9 +9,13 @@
 
 <body>
     <div class="container" id="el">
-       
+
         <top></top>
-        <router-view></router-view>
+        <div class="container-fluin  contAnim">
+            <transition enter-active-class="enter-page" leave-active-class="leave-page" mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </div>
         <bot></bot>
         <alerts></alerts>
     </div>

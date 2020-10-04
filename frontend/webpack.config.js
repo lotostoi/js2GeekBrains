@@ -8,6 +8,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
+const webpack = require('webpack');
 
 const isProduction = process.argv.join('').includes('production')
 const isDevelopment = !isProduction
@@ -24,7 +25,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js','.scss','.css','.json'],
+    extensions: ['.js', '.scss', '.css', '.json'],
     alias: {
       vue: 'vue/dist/vue.js',
       '~': path.resolve(__dirname, 'src'),
@@ -36,14 +37,14 @@ module.exports = {
       {
         test: /\.css$/i,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader: 'style-loader',
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
         ],
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
-          isProduction ? MiniCssExtractPlugin.loader: 'style-loader',
+          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
           'css-loader',
           'sass-loader',
         ],
@@ -81,8 +82,13 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         { from: '.htaccess' },
+        { from: 'favicon.ico' },
       ],
     }),
+    new webpack.DefinePlugin({
+      isDevelopment: isDevelopment,
+      isProduction: isProduction
+    })
   ],
   // devtool: 'inline-source-map',
   devServer: {

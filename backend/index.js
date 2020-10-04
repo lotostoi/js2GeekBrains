@@ -1,53 +1,43 @@
 const PORT = 3000
-const bodyParser = require('body-parser');
+// for build
+const isProd = process.isProduction
+
+const urlForProxy = isProd ? '/' : '/api/'
+
 const path = require('path')
 
+const bodyParser = require('body-parser');
+
 const express = require('express')
-
 const mongoose = require('mongoose')
+mongoose.set('useFindAndModify', false)
 
-
-const ListGoods = require('./src/models/goods')
-
-const CartGoods = require('./src/models/listCartGoods')
-
-/* const commonRoutes = require('./routes/commonRoutes')
-
-const picturesRoutes = require('./routes/pictures')
-
-const getImgRoutes = require('./routes/getImg')
-
-const delByIdRoutes = require('./routes/delById') */
-
-
+// import routers
+const listGoodsRout = require('./src/routers/listGoods')
+const listCartRout = require('./src/routers/listCart')
 
 const app = express()
+const history = require('connect-history-api-fallback');
 
-app.use(express.static(path.join(__dirname, 'files')));
+// need only in production
+if (isProd) {
+    app.use(history())
+    app.use(express.static(path.join(__dirname, 'static')));
+}
 
-app.use(express.static(path.join(__dirname, 'img')));
-
-//app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 
-app.get('/api/goods', async (req,res)=>{    
-    const goods = await ListGoods.find()
-    res.json(goods)
-})
-app.get('/api/cartGoods',async (req,res)=>{
-    const cartGoods = await CartGoods.find()
-    res.json(cartGoods)
-})
-app.get('/api/add/:id',async (req,res)=>{
-    console.log(req.params)
-    const cartGoods = await CartGoods.find()
-    res.json(cartGoods)
-})
+app.use(urlForProxy, listGoodsRout)
+app.use(urlForProxy, listCartRout)
 
-
-
-
+// need only in production
+if (isProd) {
+    app.get('*', (req, res) => {
+        res.end(req.path)
+    })
+}
 
 async function start() {
     try {

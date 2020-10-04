@@ -1,0 +1,12 @@
+.block {
+    cursor: not-allowed;
+}
+.title {
+    font-size: 25px!important;
+    font-weight: 600 !important;
+    margin: 0 10px 0 0;
+    &:hover {
+        background-color: transparent!important;
+        color: rgb(245, 153, 16) !important;
+    }
+}

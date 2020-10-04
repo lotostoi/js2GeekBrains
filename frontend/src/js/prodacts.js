@@ -23,7 +23,7 @@ export default Vue.component('products', {
     </div> 
     `,
   
-    componets: {
+    components: {
        good
     },
     computed: {

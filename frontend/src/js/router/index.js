@@ -7,6 +7,8 @@ import products from '@/js/prodacts'
 import myform from '@/js/form'
 import aboutShop from '@/js/aboutShop'
 import cart from '@/js/cart'
+import cartBody from '@/js/components/cartBody'
+import cartStatistics from '@/js/components/cartStatistics'
 
 
 const routes = [
@@ -22,9 +24,22 @@ const routes = [
         component: products
     },
     {
-        name: 'cart',
         path: "/cart",
-        component: cart
+        component: cart,
+        children: [
+            {
+                name: 'cartBody',
+                path: "",
+                component: cartBody
+            },
+            {
+                name: 'cartStatistics',
+                path: "/cart/cartStatistics",
+                component: cartStatistics
+            },
+
+        ]
+
     },
     {
         name: 'form',

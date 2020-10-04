@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import {
     mapGetters,
-    mapActions
 } from "vuex";
 
 export default Vue.component('alert', {

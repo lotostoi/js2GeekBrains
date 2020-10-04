@@ -7,8 +7,8 @@ import filt from '@/js/components/search'
 export default Vue.component('top', {
     template: `
     <nav class="navbar navbar-expand-lg navbar-light border rounded bg-light" >
-        <a class="navbar-brand" href="#">E-Shop</a>
-
+        
+        <router-link :to="{name: 'main'}" class ="link  title"  exact >E-Shop</router-link> 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto border rounded">
 
@@ -19,7 +19,7 @@ export default Vue.component('top', {
             </ul>
             <filt></filt>
             
-            <router-link :to="{name: 'cart'}" type="button" class="btn btn-secondary ml-3" exact active-class="but-active">
+            <router-link to="/cart" type="button" class="btn btn-secondary ml-3"  active-class="but-active">
                    Cart<span class="badge badge-light ml-3">{{quantity}}</span>
                
             </router-link> 

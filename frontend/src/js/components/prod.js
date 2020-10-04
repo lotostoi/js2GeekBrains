@@ -10,8 +10,28 @@ export default Vue.component('good', {
                     <div class="card-body">
                         <h5 class="card-title">{{prod.title}}</h5>
                         <h5 class="card-title">{{prod.price}}\u20bd </h5>
-                        <button v-if = "!inCart(prod._id)"  href="#" class="btn btn-primary" @click="addToCart(prod._id)" :disabled="cartLoading" >Add to cart</button>
-                        <button v-else  href="#" class="btn btn-danger" @click="delFromCart(prod._id)" :disabled="cartLoading" >Remove </button>
+                        <transition enter-active-class="btn-enter" leave-active-class="btn-leave" mode="out-in">
+                            <button v-if = "!inCart(prod._id)"  
+                                class="btn btn-primary"
+                                :class = "prod.inProcess? 'btn-secondary block': '' "
+                                @click="addToCart(prod)" 
+                                :disabled="prod.inProcess" 
+                                key="add"
+                            >   
+                                <span v-if="prod.inProcess" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Add to cart
+                            </button>
+                            <button v-else  
+                                class="btn btn-danger" 
+                                :class = "prod.inProcess? 'btn-secondary block': '' "
+                                @click="delFromCart(prod)" 
+                                :disabled="prod.inProcess"
+                                key="remove"
+                            >   
+                                <span v-if="prod.inProcess" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Remove 
+                            </button>
+                     </transition>        
                     </div>
             </div>      
     `,
@@ -34,7 +54,7 @@ export default Vue.component('good', {
     computed: {
         ...mapGetters({
             inCart: ['catalog/inCart'],
-            cartLoading:['cart/loading'],
+            cartLoading: ['cart/loading'],
         })
     },
 

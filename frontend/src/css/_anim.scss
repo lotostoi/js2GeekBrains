@@ -1,0 +1,68 @@
+@keyframes leave-btn {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(30px);
+        opacity  : 0;
+    }
+}
+
+@keyframes enter-btn {
+    from {
+        transform: translateX(-30px);
+        opacity  : 0;
+    }
+
+    to {
+        opacity  : 1;
+        transform: translateX(0);
+    }
+}
+.btn-leave {
+    animation: leave-btn 0.3s linear forwards;
+}
+
+.btn-enter {
+    animation: enter-btn 0.3s linear forwards;
+}
+
+@keyframes leave-page {
+    from {
+        perspective-origin: 50% 0%;
+        transform         : rotate3d(0, 1, 0, 0);
+        opacity           : 1;
+    }
+
+    to {
+        transform: rotate3d(0, 1, 0, 90deg);
+        opacity  : 1;
+    }
+}
+
+@keyframes enter-page {
+    from {
+        perspective-origin: 50% 0%;
+        transform         : rotate3d(0, 1, 0, -90deg);
+        opacity           : 1;
+    }
+
+    to {
+        opacity  : 1;
+        transform: rotate3d(0, 1, 0, 0);
+    }
+}
+
+.contAnim {
+    perspective    : 10000px;
+    transform-style: preserve-3d;
+}
+
+.leave-page {
+    animation: leave-page 0.3s linear forwards;
+}
+
+.enter-page {
+    animation: enter-page 0.3s linear forwards;
+}

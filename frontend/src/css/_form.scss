@@ -13,6 +13,7 @@
     font-size: 15px;
     color: rgb(34, 34, 34);
     text-decoration: none;
+    
     &:hover {
         background-color: rgb(202, 199, 202);
         text-decoration: none;
@@ -20,7 +21,7 @@
     }
 }
 .link-active {
-    background-color: rgba(240, 184, 111, 0.904);
+    background-color: rgba(160, 160, 160, 0.904);
 }
 
 .valid {

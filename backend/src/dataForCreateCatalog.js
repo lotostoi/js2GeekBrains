@@ -6,7 +6,7 @@ const names = [
     'Camera',
     'Player',
     "Monitor",
-    "Hardisk",
+    "Hard disk",
     "Memmory",
     "Mouse",
     "Router",

@@ -1,3 +1,4 @@
+const quantityGoods = 100
 
 const mongoose = require('mongoose')
 
@@ -35,7 +36,7 @@ const start = async () => {
 
         let modelGoods = model('ListGoods', good)
 
-        const goods = catalog(100)
+        const goods = catalog(quantityGoods)
 
         for (let good of goods) {
 
