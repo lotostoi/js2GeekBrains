@@ -42,9 +42,7 @@ async function start() {
     try {
 
         const link = 'mongodb+srv://lotos_toi:G0fdQ7GKoTODMmRM@cluster0.n6oze.mongodb.net/jsSecondCourseGeekBarins?retryWrites=true&w=majority'
-
         await mongoose.connect(link, { useNewUrlParser: true, useUnifiedTopology: true })
-
         app.listen(PORT, () => console.log('Server has been started...'))
 
     }
@@ -53,6 +51,5 @@ async function start() {
     }
 
 }
-
 
 start()
