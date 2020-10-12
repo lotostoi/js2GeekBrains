@@ -1,0 +1,32 @@
+@mixin mq($width, $type: min) {
+    @if $type==max {
+        $width: $width - 1px;
+    }
+    @media only screen and (#{$type}-width: $width) {
+        @content;
+    }
+}
+
+// pleceholder
+@mixin placeholder {
+    &::-webkit-input-placeholder {
+        @content;
+    }
+    &:-moz-placeholder {
+        @content;
+    }
+    &::-moz-placeholder {
+        @content;
+    }
+    &:-ms-input-placeholder {
+        @content;
+    }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+//@import "mixins";
+
+$pinc: #f16d7f;
+$pincHover: #e7bdc3;
+$pincActive: #9e2d3e;
+$base: #222222;
