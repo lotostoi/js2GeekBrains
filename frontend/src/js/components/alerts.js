@@ -1,10 +1,8 @@
 import Vue from 'vue'
-import {
-    mapGetters,
-} from "vuex";
+import { mapGetters } from 'vuex'
 
 export default Vue.component('alert', {
-    template: `
+  template: `
     <transition-group :class="place ==='corner'? 'cont-alert': 'cont-alert-center'" tag="div" leave-active-class="leave" enter-active-class="enter" mode="out-in">
         <div :class="place ==='corner'? 'message': 'message-center'" v-for="(alert) in alerts" :key="alert.id">
                 <p>{{alert.text}}</p> 
@@ -12,15 +10,15 @@ export default Vue.component('alert', {
         </div>
     </transition-group>
     `,
-    methods: {
-        reload() {
-            window.location.reload()
-        }
+  methods: {
+    reload() {
+      window.location.reload()
     },
-    computed: {
-        ...mapGetters({
-            alerts: "alerts/all",
-            place: "alerts/place",
-        }),
-    },
+  },
+  computed: {
+    ...mapGetters({
+      alerts: 'alerts/all',
+      place: 'alerts/place',
+    }),
+  },
 })

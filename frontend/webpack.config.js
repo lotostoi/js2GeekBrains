@@ -1,31 +1,30 @@
-
+const bp = require('@babel/polyfill')
 
 const path = require('path')
 const HTML = require('html-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-const webpack = require('webpack');
+const webpack = require('webpack')
 
 const isProduction = process.argv.join('').includes('production')
 const isDevelopment = !isProduction
 
-module.exports = {
+const conf = {
   context: path.resolve(__dirname, 'src'),
   mode: isProduction ? 'production' : 'development',
-  entry: {
-    index: './js/main.js',
-  },
+  entry: ['@babel/polyfill', './js/main.js'],
   output: {
     publicPath: '/',
     filename: 'js/[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.js', '.scss', '.css', '.json'],
+    extensions: ['.js', '.scss', '.css', '.json', '.vue'],
     alias: {
       vue: 'vue/dist/vue.js',
       '~': path.resolve(__dirname, 'src'),
@@ -35,24 +34,33 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
         test: /\.css$/i,
-        use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-        ],
+        use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-          'css-loader',
-          'sass-loader',
-        ],
+        use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader', 'sass-loader'],
+      },
+
+      {
+        test: /\.js$/,
+        exclude: (file) => /node_modules/.test(file) && !/\.vue\.js/.test(file),
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.(svg|woff|woff2|ttf|eot|otf)([\?]?.*)$/,
+        loader: 'file-loader?name=assets/fonts/[name].[ext]',
       },
     ],
   },
   performance: {
-    hints: false
+    hints: false,
   },
   optimization: {
     splitChunks: {
@@ -62,12 +70,10 @@ module.exports = {
       maxSize: 250000,
     },
     minimize: isProduction,
-    minimizer: [
-      new CssMinimizerPlugin(),
-      new TerserPlugin()
-    ],
+    minimizer: [new CssMinimizerPlugin(), new TerserPlugin()],
   },
   plugins: [
+    new VueLoaderPlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -77,18 +83,15 @@ module.exports = {
     }),
     new HTML({
       template: './index.html',
-      minify: isProduction
+      minify: isProduction,
     }),
     new CopyPlugin({
-      patterns: [
-        { from: '.htaccess' },
-        { from: 'favicon.ico' },
-      ],
+      patterns: [{ from: '.htaccess' }, { from: 'favicon.ico' }],
     }),
     new webpack.DefinePlugin({
       isDevelopment: isDevelopment,
-      isProduction: isProduction
-    })
+      isProduction: isProduction,
+    }),
   ],
   // devtool: 'inline-source-map',
   devServer: {
@@ -96,7 +99,12 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:3000'
-    }
+      '/api': 'http://localhost:3050',
+    },
   },
+}
+
+module.exports = (env, argv) => {
+  conf.devtool = argv.mode === 'production' ? false : 'eval-cheap-module-source-map'
+  return conf
 }
