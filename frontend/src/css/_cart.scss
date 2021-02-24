@@ -1,0 +1,118 @@
+.nav-cart {
+    display        : flex;
+    width          : 106px;
+    justify-content: center;
+    border         : 1px solid rgba(128, 128, 128, 0.479);
+    border-radius  : 3px;
+    padding        : 0;
+    margin         : 10px auto;
+}
+
+.btn-update {
+    display: flex;
+    margin : 10px auto;
+}
+
+.statistics-body {
+    display       : flex;
+    flex-direction: column;
+}
+
+.statistics-header {
+    display         : flex;
+    justify-content : center;
+    margin          : 5px 0;
+    background-color: rgba(180, 178, 178, 0.616);
+
+    & .time {
+        display        : flex;
+        padding        : 5px;
+        justify-content: center;
+        align-items    : center;
+        font-weight    : 600;
+        max-width      : 300px;
+        width          : 33%;
+        text-align     : center;
+    }
+
+    & .event {
+        display        : flex;
+        padding        : 5px;
+        justify-content: center;
+        align-items    : center;
+        font-weight    : 600;
+        max-width      : 300px;
+        width          : 33%;
+        text-align     : center;
+    }
+
+    & .obj {
+        display        : flex;
+        padding        : 5px;
+        justify-content: center;
+        align-items    : center;
+        font-weight    : 600;
+        max-width      : 300px;
+        width          : 33%;
+        text-align     : center;
+    }
+}
+
+.statistics-list {
+    display        : flex;
+    justify-content: center;
+    margin         : 5px 0;
+    background-color: rgba(180, 178, 178, 0.192);
+    &:hover {
+         background-color: rgba(230, 188, 99, 0.192);
+    }
+
+    & .time {
+        display         : flex;
+        padding         : 5px;
+        justify-content : center;
+        align-items     : center;
+        font-weight     : 600;
+        max-width       : 300px;
+        width           : 33%;
+        text-align      : center;
+    }
+
+    & .event {
+        display         : flex;
+        padding         : 5px;
+        justify-content : center;
+        align-items     : center;
+        font-weight     : 600;
+        max-width       : 300px;
+        width           : 33%;
+        text-align      : center;
+    }
+
+    & .obj {
+        display         : flex;
+        padding         : 5px;
+        justify-content : center;
+        align-items     : center;
+        font-weight     : 600;
+        max-width       : 300px;
+        width           : 33%;
+        text-align      : center;
+    }
+
+}
+
+.cartBtn {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+} 
+.operation {
+    display: flex;
+    font-weight: 600;
+    font-size: 20px;
+    margin-bottom: 2px;
+}

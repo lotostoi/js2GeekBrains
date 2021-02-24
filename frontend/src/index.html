@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин</title>
+
+</head>
+
+<body>
+    <div class="container" id="el">
+
+        <top></top>
+        <div class="container-fluin  contAnim">
+            <transition enter-active-class="enter-page" leave-active-class="leave-page" mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </div>
+        <bot></bot>
+        <alerts></alerts>
+    </div>
+</body>
+
+</html>
