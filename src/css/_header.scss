@@ -1,0 +1,59 @@
+header {
+  display: flex;
+  min-height: 30px;
+  background-color: black;
+  padding: 20px;
+  justify-content: space-between;
+
+  & > a {
+    display: flex;
+    text-decoration: none;
+    font-size: 2em;
+    color: $lightColor;
+
+    &:hover {
+      color: $colorHoverDark;
+    }
+
+    &:active {
+      color: $colorActiveDark;
+    }
+  }
+  & .search {
+    display: flex;
+    & input {
+      outline: none;
+    }
+  }
+
+  & > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    transition: transform 0.3;
+
+    &:hover {
+      color: $colorHoverDark;
+      background-color: rgb(83, 83, 83);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+
+    & > span {
+      margin-left: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 20px;
+      border-radius: 20%;
+      background-color: chocolate;
+    }
+  }
+}
